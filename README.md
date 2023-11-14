@@ -1,4 +1,44 @@
 # TP-Estrd
+#include "UFSet.h"
+
+/*
+
+ * UFSet.cpp contiene la implementación de la interfaz para UFSet declarada en UFSet.h. 
+ * Deben implementarse las operaciones de acuerdo a la representación elegida para el tipo UFSet.
+ */
+
+/* El tipo UFNode* representa:
+ *  1. un elemento de un UFSet (o sea, un nodo del árbol que contiene a todos los elementos del conjunto)
+ *  2. al conjunto en su totalidad, si el nodo es la raíz del arbol
+ *
+ *  El nodo tiene un puntero a su elemento asociado en el campo element. 
+ *  Deberán agregarse los campos necesarios para completar la representación.
+ * 
+Un conjunto es una colección de nodos conectados en un árbol, 
+donde cada nodo apunta a su padre hasta llegar a la raíz, 
+que es su propio padre. Por lo tanto, la raíz de un conjunto 
+es el elemento distinguido del conjunto.
+
+El campo parent del nodo siempre apunta a un nodo que es 
+un representante válido del conjunto. Si se sigue el puntero parent desde cualquier nodo,
+llega a la raíz del conjunto (elemento distinguido).
+
+El rango se utiliza para optimizar las operaciones de unión. 
+Al unir dos conjuntos, siempre se elige el representante del conjunto con un rango menor 
+como el padre del representante del conjunto con un rango mayor. 
+Esto ayuda a mantener el rango bajo y garantiza un buen rendimiento en las operaciones posteriores.
+ */
+struct UFNode {
+/**
+ **invariantes de representacion:
+--Cada nodo del árbol conoce al padre, y la raíz del árbol tiene un puntero a sí misma (parent apunta a sí misma).
+--El representante de un conjunto es el nodo raíz del árbol que lo representa.
+--Los conjuntos son disjuntos, lo que significa que no hay nodos compartidos entre conjuntos.*/
+   ELEM_TYPE element;
+   struct UFNode* parent;
+   int rank;
+};
+
 /* 
  * Inicializa el UFSet ufset, cuyo valor asociado será value 
  */
@@ -6,7 +46,7 @@ UFSet createUFS(ELEM_TYPE value) {
    UFNode* ufset = new UFNode; // para asignar memoria
         ufset->element = value;
         ufset->parent = ufset; // el nodo es su propio padre
-        ufset->rank = 0; // al inicializarse su rank (altura de nodos) es 0
+        ufset->rank = 0; // al inicializarse su rank es 0
         return ufset;
 }
 
