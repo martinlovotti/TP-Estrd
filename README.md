@@ -33,6 +33,7 @@ struct UFNode {
  **invariantes de representacion:
 --Cada nodo del árbol conoce al padre, y la raíz del árbol tiene un puntero a sí misma (parent apunta a sí misma).
 --El representante de un conjunto es el nodo raíz del árbol que lo representa.
+--La altura del arbol nunca puede ser menor al rango 
 --Los conjuntos son disjuntos, lo que significa que no hay nodos compartidos entre conjuntos.*/
    ELEM_TYPE element;
    struct UFNode* parent;
