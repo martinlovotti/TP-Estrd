@@ -28,6 +28,16 @@ como el padre del representante del conjunto con un rango mayor.
 Esto ayuda a mantener el rango bajo y garantiza un buen rendimiento en las operaciones posteriores.
  */
 struct UFNode {
+/**
+ **invariantes de representacion:
+
+--Cada conjunto está representado por un árbol.
+
+--Cada nodo del árbol tiene un puntero al padre, y la raíz del árbol tiene un puntero a sí misma (parent apunta a sí misma).
+
+--El representante de un conjunto es el nodo raíz del árbol que lo representa.
+
+--Los conjuntos son disjuntos, lo que significa que no hay nodos compartidos entre conjuntos.*/
    ELEM_TYPE element;
    struct UFNode* parent;
    int rank;
