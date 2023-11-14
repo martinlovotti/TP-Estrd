@@ -73,7 +73,7 @@ UFSet findUFS(UFSet elem) {
        elem->parent = root;
        elem = next;
    }
-        
+   //Luego los siguientes llamados a findUFS seran O(1)    
    return root; // Devuelve el representante
 }
 
