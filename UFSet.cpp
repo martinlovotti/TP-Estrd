@@ -51,6 +51,14 @@ ELEM_TYPE elemUFS(UFSet ufset) {
 /*
  * Encuentra el elemento distinguido para el UFSet dado. 
  * Esta operación puede ser optimizada con la técnica de compresión de camino.
+ UFSet findUF(UFSet elem) {
+  //Implementacion sin compresion de camino
+   // Encuentra la raíz siguiendo el camino hasta la raíz
+   while (elem->parent != elem) {
+         elem = elem->parent;
+   }
+   return elem; // Devuelve el representante
+}
  */
 UFSet findUFS(UFSet elem) {
   UFSet root = elem;
