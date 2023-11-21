@@ -1,11 +1,8 @@
 #include "UFSet.h"
-
 /*
-
  * UFSet.cpp contiene la implementación de la interfaz para UFSet declarada en UFSet.h. 
  * Deben implementarse las operaciones de acuerdo a la representación elegida para el tipo UFSet.
  */
-
 /* El tipo UFNode* representa:
  *  1. un elemento de un UFSet (o sea, un nodo del árbol que contiene a todos los elementos del conjunto)
  *  2. al conjunto en su totalidad, si el nodo es la raíz del arbol
@@ -28,19 +25,16 @@ como el padre del representante del conjunto con un rango mayor.
 Esto ayuda a mantener el rango bajo y garantiza un buen rendimiento en las operaciones posteriores.
  */
 struct UFNode {
-/**
- **invariantes de representacion:
-
---Cada conjunto está representado por un árbol.
-
---Cada nodo del árbol tiene un puntero al padre, y la raíz del árbol tiene un puntero a sí misma (parent apunta a sí misma).
-
---El representante de un conjunto es el nodo raíz del árbol que lo representa.
-
---Los conjuntos son disjuntos, lo que significa que no hay nodos compartidos entre conjuntos.*/
+    /* **invariantes de representacion:  
+ Invariantes de representacion:
+--Cada nodo del conjunto conoce a su padre, y el elemento distinguido apunta a si mismo (parent apunta a sí misma).
+--El representante de un conjunto es el elemento distinguido.
+--Los conjuntos son disjuntos, lo que significa que no hay nodos compartidos entre conjuntos.
+--Para cada nodo existente dentro de un conjunto todos deben terminar apuntando a la raiz del conjunto (Esto con la optimizacion)
+*/
    ELEM_TYPE element;
    struct UFNode* parent;
-   int rank;
+   int rank; //para la optimizacion, ayuda a mejorar la eficiencia en el find y en union decidir el representante
 };
 
 /* 
@@ -74,18 +68,10 @@ UFSet findUFS(UFSet elem) {
        UFSet next = elem->parent;
        elem->parent = root;
        elem = next;
-   }
+   }//Luego los siguientes llamados a findUFS seran O(1)
         
    return root; // Devuelve el representante
 }
-
-Equipo distinguido(UFSet elem) {
-  UFSet root = findUFS(elem);
-  return root->element; // Devuelve el padre
-}
-
-
-
 
 /*
  * Calcula la unión entre los conjuntos ufset1 y ufset2. 
@@ -100,9 +86,9 @@ void unionUFS(UFSet ufset1, UFSet ufset2) {
             root1->parent = root2; // el segundo conjunto sea el padre del primero
         } else if (root1->rank > root2->rank) {
             root2->parent = root1; // el primer conjunto sea el padre del segundo
-        } else {
+        } else { //Sus rangos son iguales al llegar a esta rama del else
             root2->parent = root1; // el primer conjunto sea el padre del segundo
-            root1->rank++;
+            root1->rank++; //Aumenta porque son de igual tamaño, al unirlo aumenta
         }
     }
 }
