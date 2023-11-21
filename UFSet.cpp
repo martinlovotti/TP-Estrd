@@ -1,8 +1,4 @@
 #include "UFSet.h"
-/*
- * UFSet.cpp contiene la implementación de la interfaz para UFSet declarada en UFSet.h. 
- * Deben implementarse las operaciones de acuerdo a la representación elegida para el tipo UFSet.
- */
 /* El tipo UFNode* representa:
  *  1. un elemento de un UFSet (o sea, un nodo del árbol que contiene a todos los elementos del conjunto)
  *  2. al conjunto en su totalidad, si el nodo es la raíz del arbol
@@ -25,7 +21,7 @@ como el padre del representante del conjunto con un rango mayor.
 Esto ayuda a mantener el rango bajo y garantiza un buen rendimiento en las operaciones posteriores.
  */
 struct UFNode {
-    /* **invariantes de representacion:  
+/*  
  Invariantes de representacion:
 --Cada nodo del conjunto conoce a su padre, y el elemento distinguido apunta a si mismo (parent apunta a sí misma).
 --El representante de un conjunto es el elemento distinguido.
@@ -77,6 +73,12 @@ UFSet findUFS(UFSet elem) {
  * Calcula la unión entre los conjuntos ufset1 y ufset2. 
  * Esta operación puede ser optimizada con la técnica de unión por rango.
  */
+ /*
+     void unionUF(UFSet ufset1, UFSet ufset2){ 
+     //Implementacion sin RANK 
+     UFSet root2 = findUFS(ufset2);//Raiz del segundo conjunto 
+     ufset1 -> parent = root2; //Su padre ahora es al conjunto que se unió
+};*/
 void unionUFS(UFSet ufset1, UFSet ufset2) {
    UFSet root1 = findUFS(ufset1); // raíz del primer conjunto
     UFSet root2 = findUFS(ufset2); // raíz del segundo conjunto
