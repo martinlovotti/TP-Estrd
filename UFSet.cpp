@@ -40,7 +40,7 @@ UFSet createUFS(ELEM_TYPE value) {
    UFNode* ufset = new UFNode; // para asignar memoria
         ufset->element = value;
         ufset->parent = ufset; // el nodo es su propio padre
-        ufset->rank = 0; // al inicializarse su rank (altura de nodos) es 0
+        ufset->rank = 0; // al inicializarse su rank es 0
         return ufset;
 }
 
