@@ -29,37 +29,7 @@ int main()
     Equipo bolivia       = crearEquipo(BOLIVIA,       "D");
     Equipo chile         = crearEquipo(CHILE,         "D");
     Equipo panama        = crearEquipo(PANAMA,        "D");
-
-    UFSet arg = createUFS(argentina);
-    UFSet bol = createUFS(bolivia);
-    UFSet pan = createUFS(panama);
-    UFSet ch = createUFS(chile);
-
-    UFSet vn = createUFS(venezuela);
-    UFSet mx = createUFS(mexico);
-    UFSet ur = createUFS(uruguay);
-    UFSet jm = createUFS(jamaica);
-
-    unionUFS(arg,bol);
-    unionUFS(arg,pan);
-    unionUFS(ch,arg);
-
-    unionUFS(vn,mx);
-    unionUFS(vn,ur);
-    unionUFS(jm,vn);
-
-
-    cout << "El padre de argentina es: " << nombreEquipo( distinguido(arg)) << endl;
-    cout << "El padre de panama es: " << nombreEquipo(distinguido(pan)) << endl;
-    cout << "El padre de chile es: " << nombreEquipo(distinguido(ch)) << endl;
-    cout << "El padre de bolivia es: " << nombreEquipo(distinguido(bol)) << endl;
-
-    cout << "El padre de vn es: " << nombreEquipo(distinguido(vn)) << endl;
-    cout << "El padre de mx es: " << nombreEquipo(distinguido(mx)) << endl;
-    cout << "El padre de ur es: " << nombreEquipo(distinguido(ur)) << endl;
-    cout << "El padre de jm es: " << nombreEquipo(distinguido(jm)) << endl;
-
-/**
+    
     cout << "Probando UFSet sobre equipos de la Copa..." << endl << endl;
 
     // Test 1
@@ -104,6 +74,6 @@ int main()
     caso3.push_back(chile);
     caso3.push_back(panama);
     test("Caso 3", caso3);
-*/
+
     return 0;
 }
